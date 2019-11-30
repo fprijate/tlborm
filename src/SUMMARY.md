@@ -1,5 +1,7 @@
 # Summary
 
+[The Little Book of Rust Macros](./intro.md)
+
 * [Macros, A Methodical Introduction](./mbe-README.md)
     * [Syntax Extensions](./mbe-syn-README.md)
         * [Source Analysis](./mbe-syn-source-analysis.md)
