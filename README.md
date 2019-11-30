@@ -8,4 +8,6 @@ This book is an attempt to distil the Rust community's collective knowledge of R
 
 If you wish to contribute, see [the GitHub repository](https://github.com/fprijate/tlborm).
 
-
+## View book
+[in html format](./book/index.html)
+[in pdf format](./pdf/tlborm.pdf))
