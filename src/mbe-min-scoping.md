@@ -1,6 +1,6 @@
 # Scoping
 
-The way in which macros are scoped can be somewhat unintuitive.  Firstly, unlike everything else in the languages, macros will remain visible in sub-modules.
+The way in which macros are scoped can be somewhat unintuitive.  Firstly, unlike everything else in the language, macros will remain visible in sub-modules.
 
 ```rust
 macro_rules! X { () => {}; }
@@ -103,7 +103,7 @@ mod c {
 # fn main() {}
 ```
 
-Another complication is that `#[macro_use]` applied to an `extern crate` *does not* behave this way: such declarations are effectively *hoisted* to the top of the module.  Thus, assuming `X!` is defined in an external crate called `mac`, the following holds:
+Another complication is that `#[macro_use]` applied to an `extern crate` *does not* behave this way: such declarations are effectively *hoisted* to the top of the module.  Thus, assuming `X!` is defined in an external crate called `macs`, the following holds:
 
 ```ignore
 mod a {

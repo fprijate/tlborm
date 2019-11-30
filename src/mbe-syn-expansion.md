@@ -16,7 +16,7 @@ In fact, it can turn a syntax extension result into any of the following:
 
 In other words, *where* you can invoke a macro determines what its result will be interpreted as.
 
-The compiler will take this AST node and completely replace the macro's invocation node with the output node.  *This is a structural operation*, not a textural one!
+The compiler will take this AST node and completely replace the macro's invocation node with the output node.  *This is a structural operation*, not a textual one!
 
 For example, consider the following:
 
@@ -40,7 +40,7 @@ We can visualise this partial AST as follows:
                                 └────────────┘
 ```
 
-From context, `four!()` *must* expand to an expression (the initialiser can *only* be an expression).  Thus, whatever the actual expansion is, it will be interpreted as a complete expression.  In this case, we will assume `four!` is defined such that it expands to the expression `1 + 3`.  As a result, expanding this invocation will result in the AST changing to:
+From context, `four!()` *must* expand to an expression (the initializer can *only* be an expression).  Thus, whatever the actual expansion is, it will be interpreted as a complete expression.  In this case, we will assume `four!` is defined such that it expands to the expression `1 + 3`.  As a result, expanding this invocation will result in the AST changing to:
 
 ```text
 ┌─────────────┐
