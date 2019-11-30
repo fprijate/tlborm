@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#source-analysis" id="source-analysis">Source Analysis</a></h1>
-<p>The first stage of compilation for a Rust program is tokenisation.  This is where the source text is transformed into a sequence of tokens (<em>i.e.</em> indivisible lexical units; the programming language equivalent of &quot;words&quot;).  Rust has various kinds of tokens, such as:</p>
+<p>The first stage of compilation for a Rust program is tokenization.  This is where the source text is transformed into a sequence of tokens (<em>i.e.</em> indivisible lexical units; the programming language equivalent of &quot;words&quot;).  Rust has various kinds of tokens, such as:</p>
 <ul>
 <li>Identifiers: <code>foo</code>, <code>Bambous</code>, <code>self</code>, <code>we_can_dance</code>, <code>LaCaravane</code>, …</li>
 <li>Integers: <code>42</code>, <code>72u32</code>, <code>0_______0</code>, …</li>
@@ -201,7 +201,7 @@ END
                         ╭─┴─╮
                          «0»
 </code></pre>
-<p>Note that this has <em>no relationship</em> to the AST the expression would produce; instead of a single root node, there are <em>nine</em> token trees at the root level.  For reference, the AST would be:</p>
+<p>Note that this has <em>no relationship</em> to the AST the expression would produce; instead of a single root node, there are <em>seven</em> token trees at the root level.  For reference, the AST would be:</p>
 <pre><code class="language-text">              ┌─────────┐
               │ BinOp   │
               │ op: Add │
@@ -266,21 +266,6 @@ END
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

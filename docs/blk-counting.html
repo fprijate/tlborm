@@ -179,7 +179,7 @@ macro_rules! count_tts {
 </span><span class="boring">}
 </span></code></pre></pre>
 <blockquote>
-<p><strong>Note</strong>: As of <code>rustc</code> 1.2, the compiler has <em>grevious</em> performance problems when large numbers of integer literals of unknown type must undergo inference.  We are using explicitly <code>usize</code>-typed literals here to avoid that.</p>
+<p><strong>Note</strong>: As of <code>rustc</code> 1.2, the compiler has <em>grievous</em> performance problems when large numbers of integer literals of unknown type must undergo inference.  We are using explicitly <code>usize</code>-typed literals here to avoid that.</p>
 <p>If this is not suitable (such as when the type must be substitutable), you can help matters by using <code>as</code> (<em>e.g.</em> <code>0 as $ty</code>, <code>1 as $ty</code>, <em>etc.</em>).</p>
 </blockquote>
 <p>This <em>works</em>, but will trivially exceed the recursion limit.  Unlike the repetition approach, you can extend the input size by matching multiple tokens at once.</p>
@@ -304,21 +304,6 @@ macro_rules! count_tts {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#scoping" id="scoping">Scoping</a></h1>
-<p>The way in which macros are scoped can be somewhat unintuitive.  Firstly, unlike everything else in the languages, macros will remain visible in sub-modules.</p>
+<p>The way in which macros are scoped can be somewhat unintuitive.  Firstly, unlike everything else in the language, macros will remain visible in sub-modules.</p>
 <pre><pre class="playpen"><code class="language-rust">macro_rules! X { () =&gt; {}; }
 mod a {
     X!(); // defined
@@ -235,7 +235,7 @@ mod c {
 }
 <span class="boring">fn main() {}
 </span></code></pre></pre>
-<p>Another complication is that <code>#[macro_use]</code> applied to an <code>extern crate</code> <em>does not</em> behave this way: such declarations are effectively <em>hoisted</em> to the top of the module.  Thus, assuming <code>X!</code> is defined in an external crate called <code>mac</code>, the following holds:</p>
+<p>Another complication is that <code>#[macro_use]</code> applied to an <code>extern crate</code> <em>does not</em> behave this way: such declarations are effectively <em>hoisted</em> to the top of the module.  Thus, assuming <code>X!</code> is defined in an external crate called <code>macs</code>, the following holds:</p>
 <pre><code class="language-ignore">mod a {
     // X!(); // defined, but Y! is undefined
 }
@@ -314,21 +314,6 @@ fn b() {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

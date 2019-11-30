@@ -335,7 +335,7 @@ for e in fib.take(10) { println!(&quot;{}&quot;, e) }
         </tr>
         <tr>
             <td colspan="4" style="font-size:.7em;">
-<p><em>Note</em>: there are two ⌂ here, because the next input token might match <em>either</em> the comma separator <em>between</em>em&gt; elements in the repetition, <em>or</em> the comma <em>after</em> the repetition.  The macro system will keep track of both possibilities, until it is able to decide which one to follow.</p>
+<p><em>Note</em>: there are two ⌂ here, because the next input token might match <em>either</em> the comma separator <em>between</em> elements in the repetition, <em>or</em> the comma <em>after</em> the repetition.  The macro system will keep track of both possibilities, until it is able to decide which one to follow.</p>
 <pre><code>        &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -1453,21 +1453,6 @@ fn main() {
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
