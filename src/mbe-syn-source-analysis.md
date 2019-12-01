@@ -31,7 +31,7 @@ END
 
 The next stage is parsing, where the stream of tokens is turned into an Abstract Syntax Tree (AST).  This involves building up the syntactic structure of the program in memory.  For example, the token sequence `1 + 2` is transformed into the equivalent of:
 
-```text
+<pre>
 ┌─────────┐   ┌─────────┐
 │ BinOp   │ ┌→│ LitInt  │
 │ op: Add │ │ │ val: 1  │
@@ -40,7 +40,7 @@ The next stage is parsing, where the stream of tokens is turned into an Abstract
 └─────────┘ └→│ LitInt  │
               │ val: 2  │
               └─────────┘
-```
+</pre>
 
 The AST contains the structure of the *entire* program, though it is based on purely *lexical* information.  For example, although the compiler may know that a particular expression is referring to a variable called "`a`", at this stage, it has *no way* of knowing what "`a`" is, or even *where* it comes from.
 
@@ -68,7 +68,7 @@ would be parsed into the following token trees:
 
 Note that this has *no relationship* to the AST the expression would produce; instead of a single root node, there are *seven* token trees at the root level.  For reference, the AST would be:
 
-```text
+<pre>
               ┌─────────┐
               │ BinOp   │
               │ op: Add │
@@ -92,7 +92,7 @@ Note that this has *no relationship* to the AST the expression would produce; in
                             │ Var     │─┘ └─────────┘ └→│ LitInt  │
                             │ name: d │                 │ val: 0  │
                             └─────────┘                 └─────────┘
-```
+</pre>
 
 It is important to understand the distinction between the AST and token trees.  When writing macros, you have to deal with *both* as distinct things.
 

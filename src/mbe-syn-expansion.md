@@ -26,7 +26,7 @@ let eight = 2 * four!();
 
 We can visualise this partial AST as follows:
 
-```text
+<pre>
 ┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
@@ -38,11 +38,11 @@ We can visualise this partial AST as follows:
      │ val: 2 │                 │ name: four │
      └────────┘                 │ body: ()   │
                                 └────────────┘
-```
+</pre>
 
 From context, `four!()` *must* expand to an expression (the initializer can *only* be an expression).  Thus, whatever the actual expansion is, it will be interpreted as a complete expression.  In this case, we will assume `four!` is defined such that it expands to the expression `1 + 3`.  As a result, expanding this invocation will result in the AST changing to:
 
-```text
+<pre>
 ┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
@@ -57,7 +57,7 @@ From context, `four!()` *must* expand to an expression (the initializer can *onl
                    │ LitInt │─┘ └─────────┘ └→│ LitInt │
                    │ val: 1 │                 │ val: 3 │
                    └────────┘                 └────────┘
-```
+</pre>
 
 This can be written out like so:
 

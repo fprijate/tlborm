@@ -200,7 +200,8 @@ fn main() {
                   «3»
 </code></pre>
 <p>…and here is what it gets invoked with in the second case:</p>
-<pre><code class="language-text">« »
+<pre>
+« »
  │ ┌─────────────┐
  └→│ Call        │
    │ fn: dummy   │   ┌─────────┐
@@ -215,7 +216,7 @@ fn main() {
                       │ LitInt │─┘ └─────────┘ └→│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
-</code></pre>
+</pre>
 <p>As you can see, there is exactly <em>one</em> token tree, which contains the AST which was parsed from the input to the <code>capture_expr_then_stringify!</code> invocation.  Hence, what you see in the output is not the stringified tokens, it's the stringified <em>AST node</em>.</p>
 <p>This has further implications.  Consider the following:</p>
 <pre><pre class="playpen"><code class="language-rust">macro_rules! capture_then_match_tokens {
@@ -315,6 +316,21 @@ something else (# [ inline ])
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

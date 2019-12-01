@@ -70,7 +70,7 @@ To visualise the difference another way, here is what the `stringify!` macro get
 
 …and here is what it gets invoked with in the second case:
 
-```text
+<pre>
 « »
  │ ┌─────────────┐
  └→│ Call        │
@@ -86,7 +86,7 @@ To visualise the difference another way, here is what the `stringify!` macro get
                       │ LitInt │─┘ └─────────┘ └→│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
-```
+</pre>
 
 As you can see, there is exactly *one* token tree, which contains the AST which was parsed from the input to the `capture_expr_then_stringify!` invocation.  Hence, what you see in the output is not the stringified tokens, it's the stringified *AST node*.
 

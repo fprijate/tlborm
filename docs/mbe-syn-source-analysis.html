@@ -178,7 +178,8 @@ SUB main() BEGIN
 END
 </code></pre>
 <p>The next stage is parsing, where the stream of tokens is turned into an Abstract Syntax Tree (AST).  This involves building up the syntactic structure of the program in memory.  For example, the token sequence <code>1 + 2</code> is transformed into the equivalent of:</p>
-<pre><code class="language-text">┌─────────┐   ┌─────────┐
+<pre>
+┌─────────┐   ┌─────────┐
 │ BinOp   │ ┌→│ LitInt  │
 │ op: Add │ │ │ val: 1  │
 │ lhs: o  │─┘ └─────────┘
@@ -186,7 +187,7 @@ END
 └─────────┘ └→│ LitInt  │
               │ val: 2  │
               └─────────┘
-</code></pre>
+</pre>
 <p>The AST contains the structure of the <em>entire</em> program, though it is based on purely <em>lexical</em> information.  For example, although the compiler may know that a particular expression is referring to a variable called &quot;<code>a</code>&quot;, at this stage, it has <em>no way</em> of knowing what &quot;<code>a</code>&quot; is, or even <em>where</em> it comes from.</p>
 <p>It is <em>after</em> the AST has been constructed that macros are processed.  However, before we can discuss that, we have to talk about token trees.</p>
 <h2><a class="header" href="#token-trees" id="token-trees">Token trees</a></h2>
@@ -202,7 +203,8 @@ END
                          «0»
 </code></pre>
 <p>Note that this has <em>no relationship</em> to the AST the expression would produce; instead of a single root node, there are <em>seven</em> token trees at the root level.  For reference, the AST would be:</p>
-<pre><code class="language-text">              ┌─────────┐
+<pre>
+              ┌─────────┐
               │ BinOp   │
               │ op: Add │
             ┌→│ lhs: o  │
@@ -225,7 +227,7 @@ END
                             │ Var     │─┘ └─────────┘ └→│ LitInt  │
                             │ name: d │                 │ val: 0  │
                             └─────────┘                 └─────────┘
-</code></pre>
+</pre>
 <p>It is important to understand the distinction between the AST and token trees.  When writing macros, you have to deal with <em>both</em> as distinct things.</p>
 <p>One other aspect of this to note: it is <em>impossible</em> to have an unpaired paren, bracket or brace; nor is it possible to have incorrectly nested groups in a token tree.</p>
 
@@ -266,6 +268,21 @@ END
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
