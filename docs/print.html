@@ -193,11 +193,11 @@ END
 </code></pre>
 <p>The next stage is parsing, where the stream of tokens is turned into an Abstract Syntax Tree (AST).  This involves building up the syntactic structure of the program in memory.  For example, the token sequence <code>1 + 2</code> is transformed into the equivalent of:</p>
 <pre><code class="language-text">┌─────────┐   ┌─────────┐
-│ BinOp   │ ┌╴│ LitInt  │
+│ BinOp   │ ┌→│ LitInt  │
 │ op: Add │ │ │ val: 1  │
-│ lhs: ◌  │╶┘ └─────────┘
-│ rhs: ◌  │╶┐ ┌─────────┐
-└─────────┘ └╴│ LitInt  │
+│ lhs: o  │─┘ └─────────┘
+│ rhs: o  │─┐ ┌─────────┐
+└─────────┘ └→│ LitInt  │
               │ val: 2  │
               └─────────┘
 </code></pre>
@@ -219,24 +219,24 @@ END
 <pre><code class="language-text">              ┌─────────┐
               │ BinOp   │
               │ op: Add │
-            ┌╴│ lhs: ◌  │
-┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-│ Var     │╶┘ └─────────┘ └╴│ BinOp   │
+            ┌→│ lhs: o  │
+┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+│ Var     │─┘ └─────────┘ └→│ BinOp   │
 │ name: a │                 │ op: Add │
-└─────────┘               ┌╴│ lhs: ◌  │
-              ┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-              │ Var     │╶┘ └─────────┘ └╴│ BinOp   │
+└─────────┘               ┌→│ lhs: o  │
+              ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+              │ Var     │─┘ └─────────┘ └→│ BinOp   │
               │ name: b │                 │ op: Add │
-              └─────────┘               ┌╴│ lhs: ◌  │
-                            ┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-                            │ BinOp   │╶┘ └─────────┘ └╴│ Var     │
+              └─────────┘               ┌→│ lhs: o  │
+                            ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+                            │ BinOp   │─┘ └─────────┘ └→│ Var     │
                             │ op: Add │                 │ name: e │
-                          ┌╴│ lhs: ◌  │                 └─────────┘
-              ┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-              │ Var     │╶┘ └─────────┘ └╴│ Index   │
-              │ name: c │               ┌╴│ arr: ◌  │
-              └─────────┘   ┌─────────┐ │ │ ind: ◌  │╶┐ ┌─────────┐
-                            │ Var     │╶┘ └─────────┘ └╴│ LitInt  │
+                          ┌→│ lhs: o  │                 └─────────┘
+              ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+              │ Var     │─┘ └─────────┘ └→│ Index   │
+              │ name: c │               ┌→│ arr: o  │
+              └─────────┘   ┌─────────┐ │ │ ind: o  │─┐ ┌─────────┐
+                            │ Var     │─┘ └─────────┘ └→│ LitInt  │
                             │ name: d │                 │ val: 0  │
                             └─────────┘                 └─────────┘
 </code></pre>
@@ -354,11 +354,11 @@ fn main() {
 <pre><code class="language-text">┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
-│ init: ◌     │╶─╴│ BinOp   │
+│ init: o     │──→│ BinOp   │
 └─────────────┘   │ op: Mul │
-                ┌╴│ lhs: ◌  │
-     ┌────────┐ │ │ rhs: ◌  │╶┐ ┌────────────┐
-     │ LitInt │╶┘ └─────────┘ └╴│ Macro      │
+                ┌→│ lhs: o  │
+     ┌────────┐ │ │ rhs: o  │─┐ ┌────────────┐
+     │ LitInt │─┘ └─────────┘ └→│ Macro      │
      │ val: 2 │                 │ name: four │
      └────────┘                 │ body: ()   │
                                 └────────────┘
@@ -367,15 +367,15 @@ fn main() {
 <pre><code class="language-text">┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
-│ init: ◌     │╶─╴│ BinOp   │
+│ init: o     │──→│ BinOp   │
 └─────────────┘   │ op: Mul │
-                ┌╴│ lhs: ◌  │
-     ┌────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-     │ LitInt │╶┘ └─────────┘ └╴│ BinOp   │
+                ┌→│ lhs: o  │
+     ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+     │ LitInt │─┘ └─────────┘ └→│ BinOp   │
      │ val: 2 │                 │ op: Add │
-     └────────┘               ┌╴│ lhs: ◌  │
-                   ┌────────┐ │ │ rhs: ◌  │╶┐ ┌────────┐
-                   │ LitInt │╶┘ └─────────┘ └╴│ LitInt │
+     └────────┘               ┌→│ lhs: o  │
+                   ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
+                   │ LitInt │─┘ └─────────┘ └→│ LitInt │
                    │ val: 1 │                 │ val: 3 │
                    └────────┘                 └────────┘
 </code></pre>
@@ -575,17 +575,17 @@ fn main() {
 <p>…and here is what it gets invoked with in the second case:</p>
 <pre><code class="language-text">« »
  │ ┌─────────────┐
- └╴│ Call        │
+ └→│ Call        │
    │ fn: dummy   │   ┌─────────┐
-   │ args: ◌     │╶─╴│ BinOp   │
+   │ args: o     │──→│ BinOp   │
    └─────────────┘   │ op: Mul │
-                   ┌╴│ lhs: ◌  │
-        ┌────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-        │ LitInt │╶┘ └─────────┘ └╴│ BinOp   │
+                   ┌→│ lhs: o  │
+        ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+        │ LitInt │─┘ └─────────┘ └→│ BinOp   │
         │ val: 2 │                 │ op: Add │
-        └────────┘               ┌╴│ lhs: ◌  │
-                      ┌────────┐ │ │ rhs: ◌  │╶┐ ┌────────┐
-                      │ LitInt │╶┘ └─────────┘ └╴│ LitInt │
+        └────────┘               ┌→│ lhs: o  │
+                      ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
+                      │ LitInt │─┘ └─────────┘ └→│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
 </code></pre>
@@ -3296,21 +3296,6 @@ const MEM_SIZE: usize = 30_000;
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
