@@ -67,6 +67,9 @@ Captures are written as a dollar (`$`) followed by an identifier, a colon (`:`),
 * `path`: a path (e.g. `foo`, `::std::mem::replace`, `transmute::<_, int>`, …)
 * `meta`: a meta item; the things that go inside `#[...]` and `#![...]` attributes
 * `tt`: a single token tree
+* `lifetime`: a lifetime token
+* `vis`: a possibly empty Visibility qualifier
+* `literal`: matches literal expression 
 
 For example, here is a macro which captures its input as an expression:
 
@@ -105,7 +108,15 @@ Patterns can contain repetitions.  These allow a sequence of tokens to be matche
 * `$` is a literal dollar token.
 * `( ... )` is the paren-grouped pattern being repeated.
 * `sep` is an *optional* separator token.  Common examples are `,`, and `;`.
-* `rep` is the *required* repeat control.  Currently, this can be *either* `*` (indicating zero or more repeats) or `+` (indicating one or more repeats).  You cannot write "zero or one" or any other more specific counts or ranges.
+* `rep` is the *required* repetition operator.  
+
+The repetition operators are:
+
+* `*` — indicates any number of repetitions.
+* `+` — indicates any number but at least one.
+* `?` — indicates an optional fragment with zero or one occurrences.
+
+Since ? represents at most one occurrence, it cannot be used with a separator.
 
 Repetitions can contain any other valid pattern, including literal token trees, captures, and other repetitions.
 

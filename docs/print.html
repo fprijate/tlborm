@@ -153,7 +153,7 @@
                         <h1><a class="header" href="#the-little-book-of-rust-macros" id="the-little-book-of-rust-macros">The Little Book of Rust Macros</a></h1>
 <p>This is a fork of  <a href="https://github.com/DanielKeep/tlborm/">https://github.com/DanielKeep/tlborm/</a>.</p>
 <p>Original book is transformed to <a href="https://github.com/rust-lang/mdBook/">mdBook</a> format.</p>
-<p>This book is an attempt to distil the Rust community's collective knowledge of Rust macros.  As such, both additions (in the form of pull requests) and requests (in the form of issues) are welcome.</p>
+<p>This book is an attempt to distill the Rust community's collective knowledge of Rust macros.  As such, both additions (in the form of pull requests) and requests (in the form of issues) are welcome.</p>
 <p>If you wish to contribute, see <a href="https://github.com/fprijate/tlborm">the GitHub repository</a>.</p>
 <h2><a class="header" href="#license" id="license">License</a></h2>
 <p>This work is licensed under both the <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> and the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
@@ -445,6 +445,9 @@ fn main() {
 <li><code>path</code>: a path (e.g. <code>foo</code>, <code>::std::mem::replace</code>, <code>transmute::&lt;_, int&gt;</code>, …)</li>
 <li><code>meta</code>: a meta item; the things that go inside <code>#[...]</code> and <code>#![...]</code> attributes</li>
 <li><code>tt</code>: a single token tree</li>
+<li><code>lifetime</code>: a lifetime token</li>
+<li><code>vis</code>: a possibly empty Visibility qualifier</li>
+<li><code>literal</code>: matches literal expression </li>
 </ul>
 <p>For example, here is a macro which captures its input as an expression:</p>
 <pre><code class="language-ignore">macro_rules! one_expression {
@@ -470,8 +473,15 @@ fn main() {
 <li><code>$</code> is a literal dollar token.</li>
 <li><code>( ... )</code> is the paren-grouped pattern being repeated.</li>
 <li><code>sep</code> is an <em>optional</em> separator token.  Common examples are <code>,</code>, and <code>;</code>.</li>
-<li><code>rep</code> is the <em>required</em> repeat control.  Currently, this can be <em>either</em> <code>*</code> (indicating zero or more repeats) or <code>+</code> (indicating one or more repeats).  You cannot write &quot;zero or one&quot; or any other more specific counts or ranges.</li>
+<li><code>rep</code> is the <em>required</em> repetition operator.</li>
 </ul>
+<p>The repetition operators are:</p>
+<ul>
+<li><code>*</code> — indicates any number of repetitions.</li>
+<li><code>+</code> — indicates any number but at least one.</li>
+<li><code>?</code> — indicates an optional fragment with zero or one occurrences.</li>
+</ul>
+<p>Since ? represents at most one occurrence, it cannot be used with a separator.</p>
 <p>Repetitions can contain any other valid pattern, including literal token trees, captures, and other repetitions.</p>
 <p>Repetitions use the same syntax in the expansion.</p>
 <p>For example, below is a macro which formats each element as a string.  It matches zero or more comma-separated expressions and expands to an expression that constructs a vector.</p>
