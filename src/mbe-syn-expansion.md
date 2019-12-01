@@ -30,11 +30,11 @@ We can visualise this partial AST as follows:
 ┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
-│ init: o     │──→│ BinOp   │
+│ init: o     │───│ BinOp   │
 └─────────────┘   │ op: Mul │
-                ┌→│ lhs: o  │
+                ┌─│ lhs: o  │
      ┌────────┐ │ │ rhs: o  │─┐ ┌────────────┐
-     │ LitInt │─┘ └─────────┘ └→│ Macro      │
+     │ LitInt │─┘ └─────────┘ └─│ Macro      │
      │ val: 2 │                 │ name: four │
      └────────┘                 │ body: ()   │
                                 └────────────┘
@@ -46,15 +46,15 @@ From context, `four!()` *must* expand to an expression (the initializer can *onl
 ┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
-│ init: o     │──→│ BinOp   │
+│ init: o     │───│ BinOp   │
 └─────────────┘   │ op: Mul │
-                ┌→│ lhs: o  │
+                ┌─│ lhs: o  │
      ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-     │ LitInt │─┘ └─────────┘ └→│ BinOp   │
+     │ LitInt │─┘ └─────────┘ └─│ BinOp   │
      │ val: 2 │                 │ op: Add │
-     └────────┘               ┌→│ lhs: o  │
+     └────────┘               ┌─│ lhs: o  │
                    ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
-                   │ LitInt │─┘ └─────────┘ └→│ LitInt │
+                   │ LitInt │─┘ └─────────┘ └─│ LitInt │
                    │ val: 1 │                 │ val: 3 │
                    └────────┘                 └────────┘
 </pre>

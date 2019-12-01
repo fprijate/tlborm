@@ -33,11 +33,11 @@ The next stage is parsing, where the stream of tokens is turned into an Abstract
 
 <pre>
 ┌─────────┐   ┌─────────┐
-│ BinOp   │ ┌→│ LitInt  │
+│ BinOp   │ ┌─│ LitInt  │
 │ op: Add │ │ │ val: 1  │
 │ lhs: o  │─┘ └─────────┘
 │ rhs: o  │─┐ ┌─────────┐
-└─────────┘ └→│ LitInt  │
+└─────────┘ └─│ LitInt  │
               │ val: 2  │
               └─────────┘
 </pre>
@@ -72,24 +72,24 @@ Note that this has *no relationship* to the AST the expression would produce; in
               ┌─────────┐
               │ BinOp   │
               │ op: Add │
-            ┌→│ lhs: o  │
+            ┌─│ lhs: o  │
 ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-│ Var     │─┘ └─────────┘ └→│ BinOp   │
+│ Var     │─┘ └─────────┘ └─│ BinOp   │
 │ name: a │                 │ op: Add │
-└─────────┘               ┌→│ lhs: o  │
+└─────────┘               ┌─│ lhs: o  │
               ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-              │ Var     │─┘ └─────────┘ └→│ BinOp   │
+              │ Var     │─┘ └─────────┘ └─│ BinOp   │
               │ name: b │                 │ op: Add │
-              └─────────┘               ┌→│ lhs: o  │
+              └─────────┘               ┌─│ lhs: o  │
                             ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-                            │ BinOp   │─┘ └─────────┘ └→│ Var     │
+                            │ BinOp   │─┘ └─────────┘ └─│ Var     │
                             │ op: Add │                 │ name: e │
-                          ┌→│ lhs: o  │                 └─────────┘
+                          ┌─│ lhs: o  │                 └─────────┘
               ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-              │ Var     │─┘ └─────────┘ └→│ Index   │
-              │ name: c │               ┌→│ arr: o  │
+              │ Var     │─┘ └─────────┘ └─│ Index   │
+              │ name: c │               ┌─│ arr: o  │
               └─────────┘   ┌─────────┐ │ │ ind: o  │─┐ ┌─────────┐
-                            │ Var     │─┘ └─────────┘ └→│ LitInt  │
+                            │ Var     │─┘ └─────────┘ └─│ LitInt  │
                             │ name: d │                 │ val: 0  │
                             └─────────┘                 └─────────┘
 </pre>

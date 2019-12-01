@@ -194,11 +194,11 @@ END
 <p>The next stage is parsing, where the stream of tokens is turned into an Abstract Syntax Tree (AST).  This involves building up the syntactic structure of the program in memory.  For example, the token sequence <code>1 + 2</code> is transformed into the equivalent of:</p>
 <pre>
 ┌─────────┐   ┌─────────┐
-│ BinOp   │ ┌→│ LitInt  │
+│ BinOp   │ ┌─│ LitInt  │
 │ op: Add │ │ │ val: 1  │
 │ lhs: o  │─┘ └─────────┘
 │ rhs: o  │─┐ ┌─────────┐
-└─────────┘ └→│ LitInt  │
+└─────────┘ └─│ LitInt  │
               │ val: 2  │
               └─────────┘
 </pre>
@@ -221,24 +221,24 @@ END
               ┌─────────┐
               │ BinOp   │
               │ op: Add │
-            ┌→│ lhs: o  │
+            ┌─│ lhs: o  │
 ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-│ Var     │─┘ └─────────┘ └→│ BinOp   │
+│ Var     │─┘ └─────────┘ └─│ BinOp   │
 │ name: a │                 │ op: Add │
-└─────────┘               ┌→│ lhs: o  │
+└─────────┘               ┌─│ lhs: o  │
               ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-              │ Var     │─┘ └─────────┘ └→│ BinOp   │
+              │ Var     │─┘ └─────────┘ └─│ BinOp   │
               │ name: b │                 │ op: Add │
-              └─────────┘               ┌→│ lhs: o  │
+              └─────────┘               ┌─│ lhs: o  │
                             ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-                            │ BinOp   │─┘ └─────────┘ └→│ Var     │
+                            │ BinOp   │─┘ └─────────┘ └─│ Var     │
                             │ op: Add │                 │ name: e │
-                          ┌→│ lhs: o  │                 └─────────┘
+                          ┌─│ lhs: o  │                 └─────────┘
               ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-              │ Var     │─┘ └─────────┘ └→│ Index   │
-              │ name: c │               ┌→│ arr: o  │
+              │ Var     │─┘ └─────────┘ └─│ Index   │
+              │ name: c │               ┌─│ arr: o  │
               └─────────┘   ┌─────────┐ │ │ ind: o  │─┐ ┌─────────┐
-                            │ Var     │─┘ └─────────┘ └→│ LitInt  │
+                            │ Var     │─┘ └─────────┘ └─│ LitInt  │
                             │ name: d │                 │ val: 0  │
                             └─────────┘                 └─────────┘
 </pre>
@@ -357,11 +357,11 @@ fn main() {
 ┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
-│ init: o     │──→│ BinOp   │
+│ init: o     │───│ BinOp   │
 └─────────────┘   │ op: Mul │
-                ┌→│ lhs: o  │
+                ┌─│ lhs: o  │
      ┌────────┐ │ │ rhs: o  │─┐ ┌────────────┐
-     │ LitInt │─┘ └─────────┘ └→│ Macro      │
+     │ LitInt │─┘ └─────────┘ └─│ Macro      │
      │ val: 2 │                 │ name: four │
      └────────┘                 │ body: ()   │
                                 └────────────┘
@@ -371,15 +371,15 @@ fn main() {
 ┌─────────────┐
 │ Let         │
 │ name: eight │   ┌─────────┐
-│ init: o     │──→│ BinOp   │
+│ init: o     │───│ BinOp   │
 └─────────────┘   │ op: Mul │
-                ┌→│ lhs: o  │
+                ┌─│ lhs: o  │
      ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-     │ LitInt │─┘ └─────────┘ └→│ BinOp   │
+     │ LitInt │─┘ └─────────┘ └─│ BinOp   │
      │ val: 2 │                 │ op: Add │
-     └────────┘               ┌→│ lhs: o  │
+     └────────┘               ┌─│ lhs: o  │
                    ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
-                   │ LitInt │─┘ └─────────┘ └→│ LitInt │
+                   │ LitInt │─┘ └─────────┘ └─│ LitInt │
                    │ val: 1 │                 │ val: 3 │
                    └────────┘                 └────────┘
 </pre>
@@ -580,17 +580,17 @@ fn main() {
 <pre>
 « »
  │ ┌─────────────┐
- └→│ Call        │
+ └─│ Call        │
    │ fn: dummy   │   ┌─────────┐
-   │ args: o     │──→│ BinOp   │
+   │ args: o     │───│ BinOp   │
    └─────────────┘   │ op: Mul │
-                   ┌→│ lhs: o  │
+                   ┌─│ lhs: o  │
         ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-        │ LitInt │─┘ └─────────┘ └→│ BinOp   │
+        │ LitInt │─┘ └─────────┘ └─│ BinOp   │
         │ val: 2 │                 │ op: Add │
-        └────────┘               ┌→│ lhs: o  │
+        └────────┘               ┌─│ lhs: o  │
                       ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
-                      │ LitInt │─┘ └─────────┘ └→│ LitInt │
+                      │ LitInt │─┘ └─────────┘ └─│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
 </pre>
@@ -3301,21 +3301,6 @@ const MEM_SIZE: usize = 30_000;
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         

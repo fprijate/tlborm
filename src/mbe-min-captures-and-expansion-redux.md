@@ -73,17 +73,17 @@ To visualise the difference another way, here is what the `stringify!` macro get
 <pre>
 « »
  │ ┌─────────────┐
- └→│ Call        │
+ └─│ Call        │
    │ fn: dummy   │   ┌─────────┐
-   │ args: o     │──→│ BinOp   │
+   │ args: o     │───│ BinOp   │
    └─────────────┘   │ op: Mul │
-                   ┌→│ lhs: o  │
+                   ┌─│ lhs: o  │
         ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-        │ LitInt │─┘ └─────────┘ └→│ BinOp   │
+        │ LitInt │─┘ └─────────┘ └─│ BinOp   │
         │ val: 2 │                 │ op: Add │
-        └────────┘               ┌→│ lhs: o  │
+        └────────┘               ┌─│ lhs: o  │
                       ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
-                      │ LitInt │─┘ └─────────┘ └→│ LitInt │
+                      │ LitInt │─┘ └─────────┘ └─│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
 </pre>

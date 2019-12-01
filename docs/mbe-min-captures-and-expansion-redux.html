@@ -203,17 +203,17 @@ fn main() {
 <pre>
 « »
  │ ┌─────────────┐
- └→│ Call        │
+ └─│ Call        │
    │ fn: dummy   │   ┌─────────┐
-   │ args: o     │──→│ BinOp   │
+   │ args: o     │───│ BinOp   │
    └─────────────┘   │ op: Mul │
-                   ┌→│ lhs: o  │
+                   ┌─│ lhs: o  │
         ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
-        │ LitInt │─┘ └─────────┘ └→│ BinOp   │
+        │ LitInt │─┘ └─────────┘ └─│ BinOp   │
         │ val: 2 │                 │ op: Add │
-        └────────┘               ┌→│ lhs: o  │
+        └────────┘               ┌─│ lhs: o  │
                       ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
-                      │ LitInt │─┘ └─────────┘ └→│ LitInt │
+                      │ LitInt │─┘ └─────────┘ └─│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
 </pre>
@@ -316,21 +316,6 @@ something else (# [ inline ])
 
         </div>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
