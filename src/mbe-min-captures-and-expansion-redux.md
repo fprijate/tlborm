@@ -73,17 +73,17 @@ To visualise the difference another way, here is what the `stringify!` macro get
 ```text
 « »
  │ ┌─────────────┐
- └╴│ Call        │
+ └→│ Call        │
    │ fn: dummy   │   ┌─────────┐
-   │ args: ◌     │╶─╴│ BinOp   │
+   │ args: o     │──→│ BinOp   │
    └─────────────┘   │ op: Mul │
-                   ┌╴│ lhs: ◌  │
-        ┌────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-        │ LitInt │╶┘ └─────────┘ └╴│ BinOp   │
+                   ┌→│ lhs: o  │
+        ┌────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+        │ LitInt │─┘ └─────────┘ └→│ BinOp   │
         │ val: 2 │                 │ op: Add │
-        └────────┘               ┌╴│ lhs: ◌  │
-                      ┌────────┐ │ │ rhs: ◌  │╶┐ ┌────────┐
-                      │ LitInt │╶┘ └─────────┘ └╴│ LitInt │
+        └────────┘               ┌→│ lhs: o  │
+                      ┌────────┐ │ │ rhs: o  │─┐ ┌────────┐
+                      │ LitInt │─┘ └─────────┘ └→│ LitInt │
                       │ val: 1 │                 │ val: 3 │
                       └────────┘                 └────────┘
 ```

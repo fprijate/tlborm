@@ -33,11 +33,11 @@ The next stage is parsing, where the stream of tokens is turned into an Abstract
 
 ```text
 ┌─────────┐   ┌─────────┐
-│ BinOp   │ ┌╴│ LitInt  │
+│ BinOp   │ ┌→│ LitInt  │
 │ op: Add │ │ │ val: 1  │
-│ lhs: ◌  │╶┘ └─────────┘
-│ rhs: ◌  │╶┐ ┌─────────┐
-└─────────┘ └╴│ LitInt  │
+│ lhs: o  │─┘ └─────────┘
+│ rhs: o  │─┐ ┌─────────┐
+└─────────┘ └→│ LitInt  │
               │ val: 2  │
               └─────────┘
 ```
@@ -72,24 +72,24 @@ Note that this has *no relationship* to the AST the expression would produce; in
               ┌─────────┐
               │ BinOp   │
               │ op: Add │
-            ┌╴│ lhs: ◌  │
-┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-│ Var     │╶┘ └─────────┘ └╴│ BinOp   │
+            ┌→│ lhs: o  │
+┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+│ Var     │─┘ └─────────┘ └→│ BinOp   │
 │ name: a │                 │ op: Add │
-└─────────┘               ┌╴│ lhs: ◌  │
-              ┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-              │ Var     │╶┘ └─────────┘ └╴│ BinOp   │
+└─────────┘               ┌→│ lhs: o  │
+              ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+              │ Var     │─┘ └─────────┘ └→│ BinOp   │
               │ name: b │                 │ op: Add │
-              └─────────┘               ┌╴│ lhs: ◌  │
-                            ┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-                            │ BinOp   │╶┘ └─────────┘ └╴│ Var     │
+              └─────────┘               ┌→│ lhs: o  │
+                            ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+                            │ BinOp   │─┘ └─────────┘ └→│ Var     │
                             │ op: Add │                 │ name: e │
-                          ┌╴│ lhs: ◌  │                 └─────────┘
-              ┌─────────┐ │ │ rhs: ◌  │╶┐ ┌─────────┐
-              │ Var     │╶┘ └─────────┘ └╴│ Index   │
-              │ name: c │               ┌╴│ arr: ◌  │
-              └─────────┘   ┌─────────┐ │ │ ind: ◌  │╶┐ ┌─────────┐
-                            │ Var     │╶┘ └─────────┘ └╴│ LitInt  │
+                          ┌→│ lhs: o  │                 └─────────┘
+              ┌─────────┐ │ │ rhs: o  │─┐ ┌─────────┐
+              │ Var     │─┘ └─────────┘ └→│ Index   │
+              │ name: c │               ┌→│ arr: o  │
+              └─────────┘   ┌─────────┐ │ │ ind: o  │─┐ ┌─────────┐
+                            │ Var     │─┘ └─────────┘ └→│ LitInt  │
                             │ name: d │                 │ val: 0  │
                             └─────────┘                 └─────────┘
 ```
