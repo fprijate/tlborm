@@ -4,3 +4,6 @@ language = "en"
 multilingual = false
 src = "src"
 title = "The Little Book of Rust Macros"
+
+[build]
+build-dir = "./docs"
